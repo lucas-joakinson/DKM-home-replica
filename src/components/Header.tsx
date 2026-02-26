@@ -19,20 +19,22 @@ export const Header = ({ isVisible, onToggleVisibility }: HeaderProps) => {
 
   return (
     <View style={styles.container}>
-      {/* Esquerda: Ícone de Perfil */}
-      <TouchableOpacity style={styles.leftSide}>
-        <Ionicons name="person-circle-outline" size={32} color={colors.primary} />
+      {/* Esquerda */}
+      <TouchableOpacity style={styles.profileButton}>
+        <View style={styles.profileCircle}>
+          <Ionicons name="person-outline" size={24} color={colors.primary} />
+        </View>
       </TouchableOpacity>
 
-      {/* Centro: Espaço para Imagem (Logo) */}
-      <View style={styles.center}>
+      {/* Centro */}
+      <View style={styles.logoContainer}>
         <View style={styles.logoPlaceholder}>
-          <Ionicons name="diamond-outline" size={24} color={colors.primary} />
+          <Ionicons name="diamond" size={26} color={colors.primary} />
         </View>
       </View>
 
-      {/* Direita: Notificações e Olho */}
-      <View style={styles.rightSide}>
+      {/* Direita */}
+      <View style={styles.rightActions}>
         <TouchableOpacity 
           onPress={toggleNotification}
           style={styles.actionButton}
@@ -61,40 +63,59 @@ export const Header = ({ isVisible, onToggleVisibility }: HeaderProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 30,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: colors.background,
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    backgroundColor: colors.background, 
   },
-  leftSide: {
+  profileButton: {
+    width: 44,
+    height: 44,
+    justifyContent: "center",
+  },
+  profileCircle: {
     width: 40,
     height: 40,
+    borderRadius: 20,
+    backgroundColor: colors.secondary,
     justifyContent: "center",
-    alignItems: "flex-start",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: colors.border,
   },
-  center: {
+  logoContainer: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
   },
   logoPlaceholder: {
-    width: 40,
-    height: 40,
-    backgroundColor: colors.secondary,
-    borderRadius: 20,
+    width: 48,
+    height: 48,
+    borderRadius: 14,
+    backgroundColor: colors.card,
     justifyContent: "center",
     alignItems: "center",
+    shadowColor: colors.primary,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 4,
   },
-  rightSide: {
-    flexDirection: "column",
+  rightActions: {
+    flexDirection: "row",
     alignItems: "center",
-    width: 80,
     justifyContent: "flex-end",
   },
   actionButton: {
-    marginLeft: 12,
+    marginLeft: 16,
+    width: 40,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 20,
+    backgroundColor: colors.card,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
 });

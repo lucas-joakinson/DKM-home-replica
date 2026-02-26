@@ -1,8 +1,11 @@
 export const colors = {
-  background: "#F4F6F8",
-  primary: "#4F46E5",
-  secondary: "#E5E7EB",
+  background: "#F8F7FF", 
+  primary: "#6D28D9", 
+  primaryLight: "#8B5CF6",
+  secondary: "#EDE9FE", 
+  secondaryText: "#5B21B6",
   card: "#FFFFFF",
-  text: "#111827",
-  muted: "#6B7280",
+  text: "#1E1B4B", 
+  muted: "#4C1D95", 
+  border: "#DDD6FE",
 };

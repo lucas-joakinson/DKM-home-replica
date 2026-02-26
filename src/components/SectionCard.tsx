@@ -13,9 +13,15 @@ export const SectionCard = ({ children }: Props) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.card,
-    borderRadius: 16,
+    borderRadius: 20,
     padding: 16,
-    marginVertical: 8,
+    marginVertical: 10,
+    shadowColor: colors.primary,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 10,
     elevation: 2,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
 });

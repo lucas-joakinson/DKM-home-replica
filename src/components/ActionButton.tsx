@@ -30,16 +30,20 @@ export const ActionButton = ({ title, style }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.secondary,
+    backgroundColor: colors.secondary, 
     flex: 1,
-    minHeight: 90,
-    borderRadius: 12,
+    minHeight: 96,
+    borderRadius: 16,
     justifyContent: "center",
     alignItems: "center",
     padding: 12,
-    margin: 4,
+    margin: 6,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
   text: {
     textAlign: "center",
+    color: colors.secondaryText,
+    fontWeight: "600",
   },
 });
