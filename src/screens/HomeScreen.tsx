@@ -37,10 +37,10 @@ export const HomeScreen = () => {
         <AppText variant="sectionTitle">Ações Rápidas</AppText>
 
         <View style={styles.row}>
-          <ActionButton title="Transferir" />
-          <ActionButton title="Gerar QR Code" />
-          <ActionButton title="Cartões" />
-          <ActionButton title="Mais" />
+          <ActionButton title="Transferir" iconName="send" />
+          <ActionButton title="QR Code" iconName="maximize" />
+          <ActionButton title="Cartões" iconName="credit-card" />
+          <ActionButton title="Mais" iconName="plus-circle" />
         </View>
 
         {/* Pix */}
@@ -48,12 +48,13 @@ export const HomeScreen = () => {
           <AppText variant="sectionTitle">Pix</AppText>
 
           <View style={styles.row}>
-            <ActionButton title="Transferir Pix" />
-            <ActionButton title="Pagar QR Code" />
-          </View>
-
-          <View style={styles.row}>
-            <ActionButton title="Gerar QR Code" />
+            <ActionButton 
+              title="Transferir" 
+              iconName="pix" 
+              iconFamily="MaterialIcons" 
+            />
+            <ActionButton title="Pagar QR" iconName="camera" />
+            <ActionButton title="Gerar QR" iconName="maximize" />
           </View>
         </SectionCard>
 
@@ -64,7 +65,7 @@ export const HomeScreen = () => {
             Compre, venda e acompanhe ativos digitais em tempo real.
           </AppText>
 
-          <ActionButton title="Acessar investimentos" />
+          <ActionButton title="Acessar investimentos" iconName="trending-up" />
         </SectionCard>
 
         {/* Cartão */}
@@ -74,7 +75,7 @@ export const HomeScreen = () => {
             Sem anuidade | Sem mensalidade
           </AppText>
 
-          <ActionButton title="Solicitar" />
+          <ActionButton title="Solicitar novo cartão" iconName="credit-card" />
         </SectionCard>
       </ScrollView>
     </SafeAreaView>

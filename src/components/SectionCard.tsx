@@ -8,8 +8,7 @@ interface Props {
 
 export const SectionCard = ({ children }: Props) => {
   const { fontScale } = useWindowDimensions();
-  
-  // Scale padding slightly with fontScale to maintain visual balance
+
   const responsivePadding = 12 * Math.min(fontScale, 1.5);
 
   return <View style={[styles.container, { padding: responsivePadding }]}>{children}</View>;
