@@ -3,8 +3,8 @@ import {
   View,
   StyleSheet,
   ScrollView,
-  SafeAreaView,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Header } from "../components/Header";
 import { ActionButton } from "../components/ActionButton";
 import { SectionCard } from "../components/SectionCard";
