@@ -20,17 +20,12 @@ export const Header = ({ isVisible, onToggleVisibility }: HeaderProps) => {
   return (
     <View style={styles.container}>
       {/* Esquerda */}
-      <TouchableOpacity style={styles.profileButton}>
-        <View style={styles.profileCircle}>
-          <Ionicons name="person-outline" size={24} color={colors.primary} />
-        </View>
-      </TouchableOpacity>
-
-      {/* Centro */}
-      <View style={styles.logoContainer}>
-        <View style={styles.logoPlaceholder}>
-          <Ionicons name="diamond" size={26} color={colors.primary} />
-        </View>
+      <View style={styles.leftContainer}>
+        <TouchableOpacity style={styles.profileButton}>
+          <View style={styles.profileCircle}>
+            <Ionicons name="person-outline" size={24} color={colors.primary} />
+          </View>
+        </TouchableOpacity>
       </View>
 
       {/* Direita */}
@@ -63,6 +58,7 @@ export const Header = ({ isVisible, onToggleVisibility }: HeaderProps) => {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 16,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -75,6 +71,10 @@ const styles = StyleSheet.create({
     height: 44,
     justifyContent: "center",
   },
+  leftContainer: {
+    flex: 1,
+    alignItems: "flex-start",
+  },
   profileCircle: {
     width: 40,
     height: 40,
@@ -85,24 +85,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.border,
   },
-  logoContainer: {
-    flex: 1,
-    alignItems: "center",
-  },
-  logoPlaceholder: {
-    width: 48,
-    height: 48,
-    borderRadius: 14,
-    backgroundColor: colors.card,
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: colors.primary,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 4,
-  },
   rightActions: {
+    flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-end",
