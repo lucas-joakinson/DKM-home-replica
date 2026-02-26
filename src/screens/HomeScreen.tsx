@@ -39,9 +39,6 @@ export const HomeScreen = () => {
         <View style={styles.row}>
           <ActionButton title="Transferir" />
           <ActionButton title="Gerar QR Code" />
-        </View>
-
-        <View style={styles.row}>
           <ActionButton title="Cartões" />
           <ActionButton title="Mais" />
         </View>

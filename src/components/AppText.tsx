@@ -3,7 +3,7 @@ import { Text, TextProps, StyleSheet, useWindowDimensions } from "react-native";
 import { colors } from "../theme/colors";
 
 interface AppTextProps extends TextProps {
-  variant?: "title" | "balance" | "sectionTitle" | "description" | "body" | "small";
+  variant?: "title" | "balance" | "sectionTitle" | "description" | "body" | "small" | "mini";
   children: React.ReactNode;
 }
 
@@ -25,12 +25,13 @@ export const AppText = ({
       description: 14,
       body: 16,
       small: 14,
+      mini: 12,
     };
 
     const fontSize = baseSizes[variant] || 16;
 
     const scaledFontSize = allowFontScaling 
-      ? fontSize * Math.min(fontScale)
+      ? fontSize * fontScale
       : fontSize;
 
     return {
@@ -74,6 +75,9 @@ const styles = StyleSheet.create({
     // Default
   },
   small: {
+    fontWeight: "600",
+  },
+  mini: {
     fontWeight: "600",
   },
 });

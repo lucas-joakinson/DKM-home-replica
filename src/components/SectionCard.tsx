@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, useWindowDimensions } from "react-native";
 import { colors } from "../theme/colors";
 
 interface Props {
@@ -7,15 +7,19 @@ interface Props {
 }
 
 export const SectionCard = ({ children }: Props) => {
-  return <View style={styles.container}>{children}</View>;
+  const { fontScale } = useWindowDimensions();
+  
+  // Scale padding slightly with fontScale to maintain visual balance
+  const responsivePadding = 12 * Math.min(fontScale, 1.5);
+
+  return <View style={[styles.container, { padding: responsivePadding }]}>{children}</View>;
 };
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.card,
-    borderRadius: 20,
-    padding: 16,
-    marginVertical: 10,
+    borderRadius: 16,
+    marginVertical: 6,
     shadowColor: colors.primary,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
