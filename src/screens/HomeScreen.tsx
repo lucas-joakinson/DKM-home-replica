@@ -1,13 +1,13 @@
 import React from "react";
 import {
   View,
-  Text,
   StyleSheet,
   ScrollView,
   SafeAreaView,
 } from "react-native";
 import { ActionButton } from "../components/ActionButton";
 import { SectionCard } from "../components/SectionCard";
+import { AppText } from "../components/AppText";
 import { colors } from "../theme/colors";
 
 export const HomeScreen = () => {
@@ -19,24 +19,16 @@ export const HomeScreen = () => {
       >
         {/* Saldo */}
         <SectionCard>
-          <Text
-            style={styles.title}
-            allowFontScaling
-            maxFontSizeMultiplier={2}
-          >
+          <AppText variant="title">
             Saldo conta digital
-          </Text>
-          <Text
-            style={styles.balance}
-            allowFontScaling
-            maxFontSizeMultiplier={2}
-          >
+          </AppText>
+          <AppText variant="balance">
             R$ 10.000,00
-          </Text>
+          </AppText>
         </SectionCard>
 
         {/* Ações rápidas */}
-        <Text style={styles.sectionTitle}>Ações Rápidas</Text>
+        <AppText variant="sectionTitle">Ações Rápidas</AppText>
 
         <View style={styles.row}>
           <ActionButton title="Transferir" />
@@ -50,7 +42,7 @@ export const HomeScreen = () => {
 
         {/* Pix */}
         <SectionCard>
-          <Text style={styles.sectionTitle}>Pix</Text>
+          <AppText variant="sectionTitle">Pix</AppText>
 
           <View style={styles.row}>
             <ActionButton title="Transferir Pix" />
@@ -64,27 +56,20 @@ export const HomeScreen = () => {
 
         {/* Investimentos */}
         <SectionCard>
-          <Text style={styles.sectionTitle}>Investimentos</Text>
-          <Text
-            style={styles.description}
-            allowFontScaling
-            maxFontSizeMultiplier={2}
-          >
+          <AppText variant="sectionTitle">Investimentos</AppText>
+          <AppText variant="description">
             Compre, venda e acompanhe ativos digitais em tempo real.
-          </Text>
+          </AppText>
 
           <ActionButton title="Acessar investimentos" />
         </SectionCard>
 
         {/* Cartão */}
         <SectionCard>
-          <Text style={styles.sectionTitle}>Cartão</Text>
-          <Text
-            allowFontScaling
-            maxFontSizeMultiplier={2}
-          >
+          <AppText variant="sectionTitle">Cartão</AppText>
+          <AppText variant="description">
             Sem anuidade | Sem mensalidade
-          </Text>
+          </AppText>
 
           <ActionButton title="Solicitar" />
         </SectionCard>
@@ -100,25 +85,6 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: 16,
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: colors.muted,
-  },
-  balance: {
-    fontSize: 28,
-    fontWeight: "bold",
-    marginTop: 8,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-    marginVertical: 8,
-  },
-  description: {
-    marginBottom: 12,
-    color: colors.muted,
   },
   row: {
     flexDirection: "row",

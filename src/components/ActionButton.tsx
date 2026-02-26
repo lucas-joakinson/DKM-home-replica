@@ -1,10 +1,10 @@
 import React from "react";
 import {
   TouchableOpacity,
-  Text,
   StyleSheet,
   ViewStyle,
 } from "react-native";
+import { AppText } from "./AppText";
 import { colors } from "../theme/colors";
 
 interface Props {
@@ -18,13 +18,12 @@ export const ActionButton = ({ title, style }: Props) => {
       activeOpacity={0.7}
       style={[styles.container, style]}
     >
-      <Text
+      <AppText
+        variant="small"
         style={styles.text}
-        allowFontScaling
-        maxFontSizeMultiplier={1.8}
       >
         {title}
-      </Text>
+      </AppText>
     </TouchableOpacity>
   );
 };
@@ -42,8 +41,5 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: "center",
-    fontSize: 14,
-    fontWeight: "600",
-    color: colors.text,
   },
 });
