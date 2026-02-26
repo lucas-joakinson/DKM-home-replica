@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
   ScrollView,
   SafeAreaView,
 } from "react-native";
+import { Header } from "../components/Header";
 import { ActionButton } from "../components/ActionButton";
 import { SectionCard } from "../components/SectionCard";
 import { AppText } from "../components/AppText";
 import { colors } from "../theme/colors";
 
 export const HomeScreen = () => {
+  const [isVisible, setIsVisible] = useState(true);
+
+  const toggleVisibility = () => setIsVisible(!isVisible);
+
   return (
     <SafeAreaView style={styles.safe}>
+      <Header isVisible={isVisible} onToggleVisibility={toggleVisibility} />
       <ScrollView
         contentContainerStyle={styles.container}
         showsVerticalScrollIndicator={false}
@@ -23,7 +29,7 @@ export const HomeScreen = () => {
             Saldo conta digital
           </AppText>
           <AppText variant="balance">
-            R$ 10.000,00
+            {isVisible ? "R$ 10.000,00" : "R$ ••••••••"}
           </AppText>
         </SectionCard>
 
