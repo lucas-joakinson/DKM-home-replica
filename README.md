@@ -22,7 +22,7 @@ Antes de começar, você precisará ter instalado:
 ## Instalação
 1. Clone o repositório:
    ```bash
-   git clone <https://github.com/lucas-joakinson/DKM-home-replica>
+   git clone <https://github.com/lucas-joakinson/DKM-Home>
    ```
 2. Acesse a pasta do projeto:
    ```bash
