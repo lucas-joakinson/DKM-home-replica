@@ -6,13 +6,15 @@ import {
 } from "react-native";
 import { Ionicons, Feather } from "@expo/vector-icons";
 import { colors } from "../theme/colors";
+import { AppText } from "./AppText";
 
 interface HeaderProps {
   isVisible: boolean;
   onToggleVisibility: () => void;
+  userName?: string;
 }
 
-export const Header = ({ isVisible, onToggleVisibility }: HeaderProps) => {
+export const Header = ({ isVisible, onToggleVisibility, userName }: HeaderProps) => {
   const [isNotificationOn, setIsNotificationOn] = useState(true);
 
   const toggleNotification = () => setIsNotificationOn(!isNotificationOn);
@@ -26,6 +28,7 @@ export const Header = ({ isVisible, onToggleVisibility }: HeaderProps) => {
             <Ionicons name="person-outline" size={24} color={colors.primary} />
           </View>
         </TouchableOpacity>
+        <AppText style={styles.userName}>Olá, {userName || "Carregando..."}</AppText>
       </View>
 
       {/* Direita */}
@@ -72,8 +75,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   leftContainer: {
-    flex: 1,
-    alignItems: "flex-start",
+    flex: 2,
+    flexDirection: "row",
+    alignItems: "center",
   },
   profileCircle: {
     width: 40,
@@ -84,6 +88,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 1,
     borderColor: colors.border,
+  },
+  userName: {
+    marginLeft: 12,
+    fontWeight: "600",
+    color: colors.text,
   },
   rightActions: {
     flex: 1,

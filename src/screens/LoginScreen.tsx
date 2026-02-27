@@ -35,8 +35,10 @@ export const LoginScreen = () => {
     try {
       const data = await login(cpf, password);
       
-      if (data && data.access_token) {
-        await AsyncStorage.setItem("access_token", data.access_token);
+      const token = data.access_token || data.acess_token;
+
+      if (data && token) {
+        await AsyncStorage.setItem("access_token", token);
         navigation.replace("Home");
       } else {
         Alert.alert("Erro", "Falha na autenticação: Token não recebido");
