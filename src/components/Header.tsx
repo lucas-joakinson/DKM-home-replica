@@ -12,9 +12,10 @@ interface HeaderProps {
   isVisible: boolean;
   onToggleVisibility: () => void;
   userName?: string;
+  onLogout?: () => void;
 }
 
-export const Header = ({ isVisible, onToggleVisibility, userName }: HeaderProps) => {
+export const Header = ({ isVisible, onToggleVisibility, userName, onLogout }: HeaderProps) => {
   const [isNotificationOn, setIsNotificationOn] = useState(true);
 
   const toggleNotification = () => setIsNotificationOn(!isNotificationOn);
@@ -54,6 +55,19 @@ export const Header = ({ isVisible, onToggleVisibility, userName }: HeaderProps)
             color={colors.text} 
           />
         </TouchableOpacity>
+
+        {onLogout && (
+          <TouchableOpacity 
+            onPress={onLogout}
+            style={styles.actionButton}
+          >
+            <Ionicons 
+              name="log-out-outline" 
+              size={24} 
+              color={colors.error || "#FF3B30"} 
+            />
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );

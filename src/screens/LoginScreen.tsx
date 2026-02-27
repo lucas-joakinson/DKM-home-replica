@@ -25,15 +25,29 @@ export const LoginScreen = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const formatCPF = (text: string) => {
+    const digits = text.replace(/\D/g, "").slice(0, 11);
+    if (digits.length <= 3) return digits;
+    if (digits.length <= 6) return `${digits.slice(0, 3)}.${digits.slice(3)}`;
+    if (digits.length <= 9) return `${digits.slice(0, 3)}.${digits.slice(3, 6)}.${digits.slice(6)}`;
+    return `${digits.slice(0, 3)}.${digits.slice(3, 6)}.${digits.slice(6, 9)}-${digits.slice(9, 11)}`;
+  };
+
+  const handleCpfChange = (text: string) => {
+    setCpf(formatCPF(text));
+  };
+
   const handleLogin = async () => {
-    if (!cpf || !password) {
-      Alert.alert("Erro", "Preencha todos os campos");
+    const cleanCpf = cpf.replace(/\D/g, "");
+
+    if (cleanCpf.length !== 11 || !password) {
+      Alert.alert("Erro", "Insira um CPF válido (11 dígitos) e sua senha");
       return;
     }
 
     setLoading(true);
     try {
-      const data = await login(cpf, password);
+      const data = await login(cleanCpf, password);
       
       const token = data.access_token || data.acess_token;
 
@@ -75,9 +89,10 @@ export const LoginScreen = () => {
               placeholder="000.000.000-00"
               placeholderTextColor={colors.muted}
               value={cpf}
-              onChangeText={setCpf}
+              onChangeText={handleCpfChange}
               keyboardType="numeric"
               autoCapitalize="none"
+              maxLength={14}
             />
 
             <AppText variant="small" style={styles.label}>Senha</AppText>

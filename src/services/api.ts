@@ -10,12 +10,10 @@ export const login = async (cpf: string, password: string) => {
 
   const data = await response.json();
 
-  // Handle the typo in 'acess_token' from the backend
   if (!response.ok || (!data.access_token && !data.acess_token)) {
     throw data;
   }
 
-  // Normalize the token field if it has the typo
   if (data.acess_token && !data.access_token) {
     data.access_token = data.acess_token;
   }

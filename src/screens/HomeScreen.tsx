@@ -7,6 +7,8 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 import { Header } from "../components/Header";
 import { ActionButton } from "../components/ActionButton";
@@ -16,6 +18,7 @@ import { colors } from "../theme/colors";
 import { getUserProfile } from "../services/api";
 
 export const HomeScreen = () => {
+  const navigation = useNavigation<StackNavigationProp<any>>();
   const [isVisible, setIsVisible] = useState(true);
   const [userData, setUserData] = useState<any>(null);
 
@@ -38,12 +41,31 @@ export const HomeScreen = () => {
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
+  const handleLogout = async () => {
+    Alert.alert(
+      "Sair",
+      "Deseja realmente sair da sua conta?",
+      [
+        { text: "Cancelar", style: "cancel" },
+        { 
+          text: "Sair", 
+          style: "destructive",
+          onPress: async () => {
+            await AsyncStorage.removeItem("access_token");
+            navigation.replace("Login");
+          }
+        }
+      ]
+    );
+  };
+
   return (
     <SafeAreaView style={styles.safe}>
       <Header 
         isVisible={isVisible} 
         onToggleVisibility={toggleVisibility} 
         userName={userData?.name || "Usuário"} 
+        onLogout={handleLogout}
       />
       <ScrollView
         contentContainerStyle={styles.container}
