@@ -8,4 +8,5 @@ export const colors = {
   text: "#1E1B4B", 
   muted: "#4C1D95", 
   border: "#DDD6FE",
+  error: "#EF4444"
 };

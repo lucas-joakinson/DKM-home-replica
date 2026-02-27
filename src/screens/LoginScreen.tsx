@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  useWindowDimensions,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -21,9 +22,15 @@ import { login } from "../services/api";
 
 export const LoginScreen = () => {
   const navigation = useNavigation<StackNavigationProp<any>>();
+  const { width, height } = useWindowDimensions();
   const [cpf, setCpf] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // Responsividade baseada na largura da tela
+  const isTablet = width > 768;
+  const formWidth = isTablet ? 450 : "100%";
+  const horizontalPadding = isTablet ? (width - 450) / 2 : 24;
 
   const formatCPF = (text: string) => {
     const digits = text.replace(/\D/g, "").slice(0, 11);
@@ -72,51 +79,59 @@ export const LoginScreen = () => {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.flex}
       >
-        <ScrollView contentContainerStyle={styles.container}>
-          <View style={styles.header}>
-            <AppText variant="balance" style={styles.title}>
-              Bem-vindo
-            </AppText>
-            <AppText variant="description">
-              Faça login para acessar sua conta
-            </AppText>
-          </View>
+        <ScrollView 
+          contentContainerStyle={[
+            styles.container, 
+            { paddingHorizontal: horizontalPadding }
+          ]}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={[styles.content, { width: formWidth }]}>
+            <View style={styles.header}>
+              <AppText variant="balance" style={styles.title}>
+                Bem-vindo
+              </AppText>
+              <AppText variant="description">
+                Faça login para acessar sua conta
+              </AppText>
+            </View>
 
-          <View style={styles.form}>
-            <AppText variant="small" style={styles.label}>CPF</AppText>
-            <TextInput
-              style={styles.input}
-              placeholder="000.000.000-00"
-              placeholderTextColor={colors.muted}
-              value={cpf}
-              onChangeText={handleCpfChange}
-              keyboardType="numeric"
-              autoCapitalize="none"
-              maxLength={14}
-            />
+            <View style={styles.form}>
+              <AppText variant="small" style={styles.label}>CPF</AppText>
+              <TextInput
+                style={styles.input}
+                placeholder="000.000.000-00"
+                placeholderTextColor={colors.muted}
+                value={cpf}
+                onChangeText={handleCpfChange}
+                keyboardType="numeric"
+                autoCapitalize="none"
+                maxLength={14}
+              />
 
-            <AppText variant="small" style={styles.label}>Senha</AppText>
-            <TextInput
-              style={styles.input}
-              placeholder="••••••••"
-              placeholderTextColor={colors.muted}
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-            />
+              <AppText variant="small" style={styles.label}>Senha</AppText>
+              <TextInput
+                style={styles.input}
+                placeholder="••••••••"
+                placeholderTextColor={colors.muted}
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry
+              />
 
-            <TouchableOpacity
-              style={styles.button}
-              onPress={handleLogin}
-              disabled={loading}
-              activeOpacity={0.8}
-            >
-              {loading ? (
-                <ActivityIndicator color="#FFF" />
-              ) : (
-                <AppText style={styles.buttonText}>Entrar</AppText>
-              )}
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={handleLogin}
+                disabled={loading}
+                activeOpacity={0.8}
+              >
+                {loading ? (
+                  <ActivityIndicator color="#FFF" />
+                ) : (
+                  <AppText style={styles.buttonText}>Entrar</AppText>
+                )}
+              </TouchableOpacity>
+            </View>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -135,7 +150,10 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     justifyContent: "center",
-    padding: 24,
+    paddingVertical: 40,
+  },
+  content: {
+    alignSelf: "center",
   },
   header: {
     marginBottom: 40,
@@ -144,6 +162,7 @@ const styles = StyleSheet.create({
   title: {
     color: colors.primary,
     marginBottom: 8,
+    textAlign: "center",
   },
   form: {
     backgroundColor: colors.card,

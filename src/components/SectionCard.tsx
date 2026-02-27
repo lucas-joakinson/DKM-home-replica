@@ -1,17 +1,22 @@
 import React, { ReactNode } from "react";
-import { View, StyleSheet, useWindowDimensions } from "react-native";
+import { View, StyleSheet, useWindowDimensions, StyleProp, ViewStyle } from "react-native";
 import { colors } from "../theme/colors";
 
 interface Props {
   children: ReactNode;
+  style?: StyleProp<ViewStyle>;
 }
 
-export const SectionCard = ({ children }: Props) => {
+export const SectionCard = ({ children, style }: Props) => {
   const { fontScale } = useWindowDimensions();
 
   const responsivePadding = 12 * Math.min(fontScale, 1.5);
 
-  return <View style={[styles.container, { padding: responsivePadding }]}>{children}</View>;
+  return (
+    <View style={[styles.container, { padding: responsivePadding }, style]}>
+      {children}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({

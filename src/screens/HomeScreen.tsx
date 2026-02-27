@@ -4,6 +4,7 @@ import {
   StyleSheet,
   ScrollView,
   Alert,
+  useWindowDimensions,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -19,8 +20,14 @@ import { getUserProfile } from "../services/api";
 
 export const HomeScreen = () => {
   const navigation = useNavigation<StackNavigationProp<any>>();
+  const { width } = useWindowDimensions();
   const [isVisible, setIsVisible] = useState(true);
   const [userData, setUserData] = useState<any>(null);
+
+  // Lógica de responsividade
+  const isTablet = width > 768;
+  const contentWidth = isTablet ? 720 : "100%";
+  const horizontalPadding = isTablet ? (width - 720) / 2 : 16;
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -68,63 +75,68 @@ export const HomeScreen = () => {
         onLogout={handleLogout}
       />
       <ScrollView
-        contentContainerStyle={styles.container}
+        contentContainerStyle={[
+          styles.container, 
+          { paddingHorizontal: horizontalPadding }
+        ]}
         showsVerticalScrollIndicator={false}
       >
-        {/* Saldo */}
-        <SectionCard>
-          <AppText variant="title">
-            Saldo conta digital
-          </AppText>
-          <AppText variant="balance">
-            {isVisible ? "R$ 10.000,00" : "R$ ••••••••"}
-          </AppText>
-        </SectionCard>
+        <View style={[styles.content, { width: contentWidth }]}>
+          {/* Saldo */}
+          <SectionCard>
+            <AppText variant="title">
+              Saldo conta digital
+            </AppText>
+            <AppText variant="balance">
+              {isVisible ? "R$ 10.000,00" : "R$ ••••••••"}
+            </AppText>
+          </SectionCard>
 
-        {/* Ações rápidas */}
-        <AppText variant="sectionTitle">Ações Rápidas</AppText>
-
-        <View style={styles.row}>
-          <ActionButton title="Transferir" iconName="send" />
-          <ActionButton title="QR Code" iconName="maximize" />
-          <ActionButton title="Cartões" iconName="credit-card" />
-          <ActionButton title="Mais" iconName="plus-circle" />
-        </View>
-
-        {/* Pix */}
-        <SectionCard>
-          <AppText variant="sectionTitle">Pix</AppText>
+          {/* Ações rápidas */}
+          <AppText variant="sectionTitle" style={styles.sectionHeader}>Ações Rápidas</AppText>
 
           <View style={styles.row}>
-            <ActionButton 
-              title="Transferir" 
-              iconName="pix" 
-              iconFamily="MaterialIcons" 
-            />
-            <ActionButton title="Pagar QR" iconName="camera" />
-            <ActionButton title="Gerar QR" iconName="maximize" />
+            <ActionButton title="Transferir" iconName="send" />
+            <ActionButton title="QR Code" iconName="maximize" />
+            <ActionButton title="Cartões" iconName="credit-card" />
+            <ActionButton title="Mais" iconName="plus-circle" />
           </View>
-        </SectionCard>
 
-        {/* Investimentos */}
-        <SectionCard>
-          <AppText variant="sectionTitle">Investimentos</AppText>
-          <AppText variant="description">
-            Compre, venda e acompanhe ativos digitais em tempo real.
-          </AppText>
+          {/* Pix */}
+          <SectionCard style={styles.cardSpacing}>
+            <AppText variant="sectionTitle">Pix</AppText>
 
-          <ActionButton title="Acessar investimentos" iconName="trending-up" />
-        </SectionCard>
+            <View style={styles.row}>
+              <ActionButton 
+                title="Transferir" 
+                iconName="pix" 
+                iconFamily="MaterialIcons" 
+              />
+              <ActionButton title="Pagar QR" iconName="camera" />
+              <ActionButton title="Gerar QR" iconName="maximize" />
+            </View>
+          </SectionCard>
 
-        {/* Cartão */}
-        <SectionCard>
-          <AppText variant="sectionTitle">Cartão</AppText>
-          <AppText variant="description">
-            Sem anuidade | Sem mensalidade
-          </AppText>
+          {/* Investimentos */}
+          <SectionCard style={styles.cardSpacing}>
+            <AppText variant="sectionTitle">Investimentos</AppText>
+            <AppText variant="description">
+              Compre, venda e acompanhe ativos digitais em tempo real.
+            </AppText>
 
-          <ActionButton title="Solicitar novo cartão" iconName="credit-card" />
-        </SectionCard>
+            <ActionButton title="Acessar investimentos" iconName="trending-up" />
+          </SectionCard>
+
+          {/* Cartão */}
+          <SectionCard style={styles.cardSpacing}>
+            <AppText variant="sectionTitle">Cartão</AppText>
+            <AppText variant="description">
+              Sem anuidade | Sem mensalidade
+            </AppText>
+
+            <ActionButton title="Solicitar novo cartão" iconName="credit-card" />
+          </SectionCard>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -136,10 +148,21 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   container: {
-    padding: 16,
+    paddingVertical: 16,
+  },
+  content: {
+    alignSelf: "center",
   },
   row: {
     flexDirection: "row",
     flexWrap: "wrap",
+    marginHorizontal: -4,
+  },
+  sectionHeader: {
+    marginTop: 24,
+    marginBottom: 8,
+  },
+  cardSpacing: {
+    marginTop: 24,
   },
 });
