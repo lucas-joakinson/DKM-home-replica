@@ -65,7 +65,6 @@ export const LoginScreen = () => {
         Alert.alert("Erro", "Falha na autenticação: Token não recebido");
       }
     } catch (error: any) {
-      console.error("Login Error:", error);
       const message = error.message || "Usuário ou senha incorreta";
       Alert.alert("Erro", message);
     } finally {
